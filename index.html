@@ -1,13 +1,46 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>flower-water-ripples</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Water Ripples</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <div id="stage" class="ripple-stage">
+    <canvas id="gl" class="ripple-stage__canvas ripple-stage__canvas--water"></canvas>
+    <canvas id="fx" class="ripple-stage__canvas ripple-stage__canvas--flowers"></canvas>
+  </div>
+
+  <div id="cursor" class="ripple-stage__cursor"></div>
+
+  <button id="panelToggle" class="settings-panel__toggle" title="settings"><span class="material-symbols-rounded">tune</span></button>
+
+  <div id="panel" class="settings-panel">
+    <div class="settings-panel__control"><label class="settings-panel__label" for="rRipple">ripple</label><input type="range" class="settings-panel__slider" id="rRipple" min="0.2" max="2.4" step="0.01" value="1"></div>
+    <div class="settings-panel__control"><label class="settings-panel__label" for="rPetals">leaves</label><input type="range" class="settings-panel__slider" id="rPetals" min="0" max="20" step="1" value="8"></div>
+    <div class="settings-panel__control"><label class="settings-panel__label" for="rLight">light</label><input type="range" class="settings-panel__slider" id="rLight" min="0" max="2" step="0.01" value="1"></div>
+    <div class="settings-panel__divider"></div>
+    <button class="settings-panel__button settings-panel__button--reset" id="btnReset" title="reset"><span class="material-symbols-rounded">restart_alt</span></button>
+    <button class="settings-panel__button settings-panel__button--save" id="btnSave" title="save image"><span class="material-symbols-rounded">photo_camera</span></button>
+    <div class="settings-panel__divider"></div>
+    <div class="settings-panel__social">
+      <a class="settings-panel__social-link" title="GitHub">
+        <svg class="settings-panel__social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+      </a>
+      <a class="settings-panel__social-link" title="App Icon">
+        <img class="settings-panel__social-icon" src="/assets/favicon-dark.svg" alt="App Icon">
+      </a>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
