@@ -9,6 +9,13 @@ const PHOTO_SRC = '/assets/background.jpg';
 const glCv = document.getElementById('gl');
 const fxCv = document.getElementById('fx');
 const fctx = fxCv.getContext('2d');
+
+// Hidden composited source for liquid glass.
+// The glass shader samples this canvas, so it must contain every visual layer
+// that should be refracted: WebGL water/background + 2D yellow flowers.
+const compositeCv = document.createElement('canvas');
+const compositeCtx = compositeCv.getContext('2d');
+
 const DPR  = Math.min(window.devicePixelRatio || 1, 2);
 
 let W = 0, H = 0;
@@ -394,6 +401,14 @@ function drawPetals(t) {
   }
 }
 
+function updateCompositeSource() {
+  // Use raw backing-store pixels here. Both source canvases are DPR-sized.
+  compositeCtx.setTransform(1, 0, 0, 1, 0, 0);
+  compositeCtx.clearRect(0, 0, compositeCv.width, compositeCv.height);
+  compositeCtx.drawImage(glCv, 0, 0);
+  compositeCtx.drawImage(fxCv, 0, 0);
+}
+
 // Sparkles logic removed
 
 /* ============================== layout ============================== */
@@ -412,6 +427,7 @@ function layout() {
   H = newH;
   glCv.width = W * DPR;  glCv.height = H * DPR;
   fxCv.width = W * DPR;  fxCv.height = H * DPR;
+  compositeCv.width = glCv.width; compositeCv.height = glCv.height;
   fctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   allocSim();
   if (glReady) {
@@ -488,7 +504,7 @@ const LOCALIZATION = {
 function localizeUI() {
   const lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
   const isZh = lang.startsWith('zh');
-  const texts = isZh ? LOCALIZATION.zh : LOCALIZATION.en;
+  const texts = isZh ? LOCALIZATION.zh : LOCALIZATION.en;  
   
   document.querySelector('label[for=rRipple]').textContent = texts.ripple;
   document.querySelector('label[for=rPetals]').textContent = texts.leaves;
@@ -590,6 +606,13 @@ function frame(now) {
   updatePetals(dt, t);
   drawPetals(t);
 
+  // Liquid glass must sample after all background layers are rendered.
+  // Otherwise the glass only sees glCv and covers/hides fxCv flowers.
+  updateCompositeSource();
+  if (liquidGlass) {
+    liquidGlass.tick();
+  }
+
   requestAnimationFrame(frame);
 }
 
@@ -605,7 +628,7 @@ img.onload = () => {
   localizeUI();
   
   liquidGlass = createCanvasLiquidGlass({
-    source: glCv,
+    source: compositeCv,
     container: document.getElementById('stage'),
     dpr: DPR
   });
@@ -630,7 +653,8 @@ img.onload = () => {
     glint: 0.35
   });
 
-  liquidGlass.start();
+  // Do not call liquidGlass.start(). The main frame loop manually ticks it
+  // after glCv + fxCv are composited, keeping source order deterministic.
   
   requestAnimationFrame(frame);
 };
