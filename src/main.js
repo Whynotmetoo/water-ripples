@@ -102,11 +102,6 @@ uniform vec2  uFrac;    // cover-crop fractions
 uniform float uRefr;
 uniform float uLight;
 uniform float uTime;
-uniform float uAspect;  // photoH / photoW
-
-#define NF 5
-uniform vec3 uFl[NF];   // cx, cy, r   (photo uv)
-uniform vec4 uFlA[NF];  // rot, offX, offY, scale
 
 float h(vec2 p){ return texture2D(uSim, p).r - 0.5019608; }
 
@@ -120,21 +115,6 @@ void main(){
 
   vec2 puv = (vUv - 0.5) * uFrac + 0.5;
 
-  // floating blossoms: local swirl around each flower in the photo
-  for (int i = 0; i < NF; i++) {
-    vec2 d = puv - uFl[i].xy;
-    vec2 dw = vec2(d.x, d.y * uAspect);
-    float dist = length(dw);
-    float r = uFl[i].z;
-    if (dist < r) {
-      float f = smoothstep(r, r * 0.3, dist);
-      float ang = uFlA[i].x * f;
-      float cs = cos(ang), sn = sin(ang);
-      vec2 rotd = vec2(dw.x * cs - dw.y * sn, dw.x * sn + dw.y * cs);
-      rotd *= mix(1.0, uFlA[i].w, f);
-      puv = uFl[i].xy + vec2(rotd.x, rotd.y / uAspect) + uFlA[i].yz * f;
-    }
-  }
 
   puv += grad * uRefr;
   puv = clamp(puv, 0.002, 0.998);
@@ -187,7 +167,7 @@ function initGL() {
   gl.enableVertexAttribArray(loc);
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
 
-  for (const n of ['uPhoto','uSim','uTexel','uFrac','uRefr','uLight','uTime','uAspect','uFl','uFlA']) {
+  for (const n of ['uPhoto','uSim','uTexel','uFrac','uRefr','uLight','uTime']) {
     uni[n] = gl.getUniformLocation(prog, n);
   }
   gl.uniform1i(uni.uPhoto, 0);
@@ -226,45 +206,9 @@ function updateCover() {
   coverFy = H / (s * photoH);
   gl.uniform2f(uni.uFrac, coverFx, coverFy);
   gl.uniform2f(uni.uTexel, 1 / NX, 1 / NY);
-  gl.uniform1f(uni.uAspect, photoH / photoW);
 }
 
-/* ============== photo blossoms: sway / breathe / ripple-kick ============== */
-const FLOWERS = [
-  { cx: 0.28, cy: 0.21, r: 0.27, phase: 0.0, speed: 0.34, kick: 0 },
-  { cx: 0.73, cy: 0.47, r: 0.28, phase: 2.1, speed: 0.27, kick: 0 },
-  { cx: 0.20, cy: 0.70, r: 0.30, phase: 4.0, speed: 0.31, kick: 0 },
-  { cx: 0.83, cy: 0.92, r: 0.30, phase: 1.2, speed: 0.24, kick: 0 },
-  { cx: 0.92, cy: 0.05, r: 0.22, phase: 5.3, speed: 0.29, kick: 0 }
-];
-const flArr  = new Float32Array(FLOWERS.length * 3);
-const flAArr = new Float32Array(FLOWERS.length * 4);
 
-function updateFlowerAnim(t) {
-  for (let i = 0; i < FLOWERS.length; i++) {
-    const f = FLOWERS[i];
-    const su = (f.cx - 0.5) / coverFx + 0.5;
-    const sv = (f.cy - 0.5) / coverFy + 0.5;
-    const [dx, dy] = gradAt(su * NX, sv * NY);
-    f.kick += ((dx + dy) * 0.5 - f.kick) * 0.08;
-    const kick = Math.max(-0.12, Math.min(0.12, f.kick));
-    const rot = Math.sin(t * f.speed + f.phase) * 0.05
-              + Math.sin(t * f.speed * 1.7 + f.phase * 2.0) * 0.018
-              + kick;
-    const ox = Math.sin(t * 0.2 + f.phase) * 0.0042 + dx * 0.02;
-    const oy = Math.cos(t * 0.17 + f.phase * 1.6) * 0.0038 + dy * 0.02;
-    const sc = 1 + Math.sin(t * 0.45 + f.phase) * 0.013;
-    flArr[i * 3]     = f.cx;
-    flArr[i * 3 + 1] = f.cy;
-    flArr[i * 3 + 2] = f.r;
-    flAArr[i * 4]     = rot;
-    flAArr[i * 4 + 1] = ox;
-    flAArr[i * 4 + 2] = oy;
-    flAArr[i * 4 + 3] = sc;
-  }
-  gl.uniform3fv(uni.uFl, flArr);
-  gl.uniform4fv(uni.uFlA, flAArr);
-}
 
 /* =================== overlay petals (procedural) =================== */
 function mulberry32(seed) {
@@ -409,7 +353,7 @@ function updateCompositeSource() {
   compositeCtx.drawImage(fxCv, 0, 0);
 }
 
-// Sparkles logic removed
+
 
 /* ============================== layout ============================== */
 let liquidGlass;
@@ -599,7 +543,7 @@ function frame(now) {
   gl.uniform1f(uni.uRefr, 0.42);
   gl.uniform1f(uni.uLight, params.light);
   gl.uniform1f(uni.uTime, t);
-  updateFlowerAnim(t);
+
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
   fctx.clearRect(0, 0, W, H);
