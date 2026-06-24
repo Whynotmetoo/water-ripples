@@ -11,10 +11,11 @@
 </p>
 
 <p align="center">
-  <b>English</b> · <a href="README.zh-CN.md">简体中文</a>
+  <b>English</b> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.es.md">Español</a> · <a href="README.ko.md">한국어</a>
 </p>
 
 Water Ripples is an interactive web page featuring realistic WebGL water ripple physics, floating yolk-yellow plumeria blossoms, and a premium borderless liquid-glass settings card that warps the underlying ripples in real-time.
+![demo](./public/demo.gif)
 
 <p align="center">
   <a href="#features">Key Features</a> • <a href="#development">Development</a>
