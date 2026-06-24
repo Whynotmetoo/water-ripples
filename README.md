@@ -20,6 +20,9 @@ Water Ripples is an interactive web page featuring realistic WebGL water ripple 
   <a href="#features">Key Features</a> • <a href="#development">Development</a>
 </p>
 
+## Live Demo
+To view the demo, visit: [https://ripple.carsonye.com/](https://ripple.carsonye.com/)
+
 ## Key Features
 
 - **Realistic Water Simulation**: A coarse grid CPU simulation mapped onto a WebGL shader pass with diffuse lighting, specular glints, and automatic ambient water breathing.
