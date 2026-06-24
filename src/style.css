@@ -26,9 +26,10 @@ input:focus, input:focus-visible, input:active,
   box-shadow: none; /* override default focus shadows without stripping design shadows */
 }
 
-.material-symbols-rounded {
-  font-weight: 800 !important;
-  font-variation-settings: 'FILL' 0, 'wght' 800, 'GRAD' 200, 'opsz' 24 !important;
+.settings-panel__icon {
+  display: block;
+  fill: currentColor;
+  flex: none;
 }
 
 /* Water Ripple Stage & Canvases */
@@ -102,9 +103,10 @@ input:focus, input:focus-visible, input:active,
   transform: scale(0.94);
 }
 
-.settings-panel__toggle .material-symbols-rounded {
-  font-size: 32px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+.settings-panel__toggle .settings-panel__icon {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
 }
 
 /* Settings Card Panel Container (BEM: .settings-panel) */
@@ -234,8 +236,9 @@ input:focus, input:focus-visible, input:active,
   transform: scale(.97);
 }
 
-.settings-panel__button .material-symbols-rounded {
-  font-size: 26px;
+.settings-panel__button .settings-panel__icon {
+  width: 26px;
+  height: 26px;
 }
 
 /* Social / Branding Icons at the bottom of the panel */
@@ -318,7 +321,8 @@ img.settings-panel__social-icon {
     border-radius: 12px;
   }
   
-  .settings-panel__button .material-symbols-rounded {
-    font-size: 22px;
+  .settings-panel__button .settings-panel__icon {
+    width: 22px;
+    height: 22px;
   }
 }

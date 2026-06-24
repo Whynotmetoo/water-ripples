@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
   <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
@@ -19,15 +18,27 @@
 
   <div id="cursor" class="ripple-stage__cursor"></div>
 
-  <button id="panelToggle" class="settings-panel__toggle" title="settings"><span class="material-symbols-rounded">tune</span></button>
+  <button id="panelToggle" class="settings-panel__toggle" title="settings">
+    <svg class="settings-panel__icon" viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+      <path d="M448.5-104.81Q432-120.63 432-144v-161q0-23.38 16.5-39.19Q465-360 488-360t39 15.81q16 15.81 16 39.19v25h265q23.38 0 39.19 16Q863-248 863-225t-15.81 39.5Q831.38-169 808-169H543v25q0 23.37-16 39.19Q511-89 488-89t-39.5-15.81ZM152-169q-23.37 0-39.19-16.5Q97-202 97-225t15.81-39q15.82-16 39.19-16h161q23.38 0 39.19 16Q368-248 368-225t-15.81 39.5Q336.38-169 313-169H152Zm121.5-192.5Q257-378 257-401v-24H152q-23.37 0-39.19-16Q97-457 97-480t15.81-39q15.82-16 39.19-16h105v-25q0-23.38 16.5-39.19Q290-615 313-615t39 15.81q16 15.81 16 39.19v160q0 23.37-16 39.19Q336-345 313-345t-39.5-16.5ZM487-425q-23.37 0-39.19-16Q432-457 432-480t15.81-39q15.82-16 39.19-16h321q23.38 0 39.19 16Q863-503 863-480t-15.81 39q-15.81 16-39.19 16H487Zm121.5-190.81Q592-631.63 592-655v-161q0-23.38 16.5-39.19Q625-871 648-871t39 15.81q16 15.81 16 39.19v25h105q23.38 0 39.19 16Q863-759 863-736t-15.81 39.5Q831.38-680 808-680H703v25q0 23.37-16 39.19Q671-600 648-600t-39.5-15.81ZM152-680q-23.37 0-39.19-16.5Q97-713 97-736t15.81-39q15.82-16 39.19-16h321q23.38 0 39.19 16Q528-759 528-736t-15.81 39.5Q496.38-680 473-680H152Z"/>
+    </svg>
+  </button>
 
   <div id="panel" class="settings-panel">
     <div class="settings-panel__control"><label class="settings-panel__label" for="rRipple">ripple</label><input type="range" class="settings-panel__slider" id="rRipple" min="0.2" max="2.4" step="0.01" value="1"></div>
     <div class="settings-panel__control"><label class="settings-panel__label" for="rPetals">leaves</label><input type="range" class="settings-panel__slider" id="rPetals" min="0" max="20" step="1" value="8"></div>
     <div class="settings-panel__control"><label class="settings-panel__label" for="rLight">light</label><input type="range" class="settings-panel__slider" id="rLight" min="0" max="2" step="0.01" value="1"></div>
     <div class="settings-panel__divider"></div>
-    <button class="settings-panel__button settings-panel__button--reset" id="btnReset" title="reset"><span class="material-symbols-rounded">restart_alt</span></button>
-    <button class="settings-panel__button settings-panel__button--save" id="btnSave" title="save image"><span class="material-symbols-rounded">photo_camera</span></button>
+    <button class="settings-panel__button settings-panel__button--reset" id="btnReset" title="reset">
+      <svg class="settings-panel__icon" viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+        <path d="M363-105q-105-37-171-127.5T126-438q0-51 15-99t41-90q15-25 45-26.5t53 21.5q14 14 15.5 35.5T285-555q-16 26-24.5 56t-8.5 61q0 72 39.5 129T395-227q20 8 32.5 25t12.5 36q0 34-23.5 53t-53.5 8Zm234 0q-30 11-53.5-8T520-166q0-18 12.5-35.5T565-227q63-26 103-83t40-128q0-89-59.5-154T501-665h-7l17 17q14 14 14 33.5T511-581q-14 14-33.5 14T444-581L334-691q-9-9-13.5-20.5T316-735q0-12 4.5-23.5T334-779l110-111q14-14 33.5-14t33.5 14q14 14 14 33.5T511-823l-31 31h8q145 0 245.5 104T834-438q0 115-66 205T597-105Z"/>
+      </svg>
+    </button>
+    <button class="settings-panel__button settings-panel__button--save" id="btnSave" title="save image">
+      <svg class="settings-panel__icon" viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+        <path d="M479.76-252Q558-252 613-306.76q55-54.77 55-133Q668-518 613.24-573q-54.77-55-133-55Q402-628 347-573.24q-55 54.77-55 133Q292-362 346.76-307q54.77 55 133 55Zm.24-106q-35 0-58.5-23.5T398-440q0-35 23.5-58.5T480-522q35 0 58.5 23.5T562-440q0 35-23.5 58.5T480-358ZM172-86q-53 0-89.5-36.5T46-212v-456q0-53 36.5-89.5T172-794h96l52-47q17-16 39.5-24.5T405-874h150q23 0 45.5 8.5T640-841l52 47h96q53 0 89.5 36.5T914-668v456q0 53-36.5 89.5T788-86H172Zm0-126h616v-456H641l-84-80H406l-90 80H172v456Zm308-228Z"/>
+      </svg>
+    </button>
     <div class="settings-panel__divider"></div>
     <div class="settings-panel__social">
       <a class="settings-panel__social-link" title="GitHub" href="https://github.com/Whynotmetoo/water-ripples">
@@ -36,7 +47,7 @@
         </svg>
       </a>
       <a class="settings-panel__social-link" title="App Icon" href="https://lab.carsonye.com/">
-        <img class="settings-panel__social-icon" src="/assets/favicon-dark.svg" alt="App Icon">
+        <img class="settings-panel__social-icon" src="/assets/cy-icon.svg" alt="App Icon">
       </a>
     </div>
   </div>
