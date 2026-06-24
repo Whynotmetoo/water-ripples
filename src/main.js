@@ -580,10 +580,10 @@ img.onload = () => {
   liquidGlass.registerLens(panelEl, {
     radius: 28,
     depth: 60,
-    feather: 16,
+    feather: 18,
     curve: 1.5,
-    chroma: 0.08,
-    tint: [1, 1, 1, 0.02],
+    chroma: 0.1,
+    tint: [1, 1, 1, 0.06],
     glint: 0.35
   });
 
