@@ -504,7 +504,7 @@ const LOCALIZATION = {
 function localizeUI() {
   const lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
   const isZh = lang.startsWith('zh');
-  const texts = LOCALIZATION.zh;
+  const texts = isZh ? LOCALIZATION.zh : LOCALIZATION.en;
   
   document.querySelector('label[for=rRipple]').textContent = texts.ripple;
   document.querySelector('label[for=rPetals]').textContent = texts.leaves;
