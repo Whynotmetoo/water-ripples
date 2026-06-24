@@ -11,10 +11,11 @@
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> · <b>简体中文</b>
+  <a href="README.md">English</a> · <b>简体中文</b> · <a href="README.ja.md">日本語</a> · <a href="README.es.md">Español</a> · <a href="README.ko.md">한국어</a>
 </p>
 
-水波小黄花是一个高度交互的网页应用。它具有拟真的 WebGL 水波物理模拟、随波漂浮的鲜艳黄色鸡蛋花，以及一个高质感的无边框液态玻璃控制面板，可在运行中实时折射变形底下的水流与花朵。
+一个高度交互的网页应用。它具有拟真的 WebGL 水波物理模拟、随波漂浮的鲜艳黄色鸡蛋花，以及一个高质感的无边框液态玻璃控制面板，可在运行中实时折射变形底下的水流与花朵。
+![demo](./public/demo.gif)
 
 <p align="center">
   <a href="#核心特性">核心特性</a> • <a href="#开发指南">开发指南</a>
