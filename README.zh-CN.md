@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/logo.svg" alt="Water Ripples Icon" width="96" height="96">
+  <img src="public/favicon.svg" alt="Water Ripples Icon" width="96" height="96">
   <h1>Water Ripples</h1>
 </div>
 
@@ -20,6 +20,8 @@
   <a href="#核心特性">核心特性</a> • <a href="#开发指南">开发指南</a>
 </p>
 
+## 实时演示
+请访问: [https://ripple.carsonye.com/](https://ripple.carsonye.com/)
 ## 核心特性
 
 - **拟真水波模拟**：CPU 粗网格波动计算配合 WebGL 片元着色器渲染，支持环境自然水滴波动、漫反射光影以及波峰镜面高光。
