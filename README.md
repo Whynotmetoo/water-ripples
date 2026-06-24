@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/logo.svg" alt="Water Ripples Icon" width="96" height="96">
+  <img src="public/favicon.svg" alt="Water Ripples Icon" width="96" height="96">
   <h1>Water Ripples</h1>
 </div>
 
