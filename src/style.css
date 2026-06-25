@@ -11,7 +11,7 @@ body {
 }
 
 body {
-  font-family: 'Karla', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: linear-gradient(180deg, #e8eef3, #d6e2ea);
   -webkit-tap-highlight-color: transparent;
   touch-action: none;
@@ -282,8 +282,8 @@ input:focus, input:focus-visible, input:active,
 
 /* Image social icon customized size and opacity transition */
 img.settings-panel__social-icon {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   opacity: 0.8;
   transition: opacity 0.2s;
 }
