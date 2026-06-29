@@ -563,11 +563,16 @@ function frame(now) {
 /* ============================== boot ============================== */
 const img = new Image();
 img.onload = () => {
-  initGL();
-  setupPhotoTexture(img);
-  glReady = true;
+  // A resize may have already recorded the current dimensions while the image
+  // was loading. Size the canvases first, then initialize every GL resource
+  // explicitly instead of relying on layout() to run after glReady changes.
   layout();
+  initGL();
   gl.viewport(0, 0, glCv.width, glCv.height);
+  setupPhotoTexture(img);
+  setupSimTexture();
+  updateCover();
+  glReady = true;
   
   localizeUI();
   
